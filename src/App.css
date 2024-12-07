@@ -5,6 +5,29 @@
   text-align: center;
 }
 
+.path-bg {
+  background-image: url('assets/ice.png');
+  background-size: cover;
+  background-position: center;
+}
+.wall-bg {
+  background-image: url('assets/wall.png');
+  background-size: cover;
+  background-position: center;
+}
+.goal-bg {
+  background-image: url('assets/egg.png');
+  background-size: cover;
+  background-position: center;
+}
+.player-bg {
+  background-image: url('assets/penguin.png');
+  background-size: cover;
+  background-position: center;
+}
+
+
+
 .logo {
   height: 6em;
   padding: 1.5em;
