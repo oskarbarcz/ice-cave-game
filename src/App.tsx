@@ -38,6 +38,10 @@ export default function App() {
     };
 
     window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keyup', handleKeyUp);
+    };
   }, [bitmap]);
 
   return (
