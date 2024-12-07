@@ -1,4 +1,4 @@
-export type CellValue = 0 /* path */ | 1 /* wall */ | 2 /* player */;
+export type CellValue = 0 /* path */ | 1 /* wall */ | 2 /* player */ | 5 /* goal */;
 export type BoardRow = CellValue[];
 export type BoardRows = BoardRow[];
 
@@ -24,6 +24,10 @@ export class BoardModel {
 
   movePlayer = ({x,y}:PositionRef): boolean => {
     if (this.board[y][x] != 1) {
+      if (this.board[y][x] === 5) {
+        console.log('You win!');
+        throw new Error('You win!');
+      }
       this.board[y][x] = 2;
       this.board[this.playerPosition.y][this.playerPosition.x] = 0;
       this.playerPosition = { x, y };
