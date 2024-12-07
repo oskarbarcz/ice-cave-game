@@ -10,13 +10,29 @@ export type PositionRef = {
 export class BoardModel {
   board: BoardRows;
 
+  playerPosition: PositionRef = { x: 0, y: 0 };
+
   constructor(rows: BoardRows) {
     this.board = rows;
   }
 
   renderPlayer = ({x, y}:PositionRef): void => {
     this.board[y-1][x-1] = 2;
+    this.playerPosition.x = x-1;
+    this.playerPosition.y = y-1;
   }
+
+  movePlayer = ({x,y}:PositionRef): boolean => {
+    if (this.board[y][x] != 1) {
+      this.board[y][x] = 2;
+      this.board[this.playerPosition.y][this.playerPosition.x] = 0;
+      this.playerPosition = { x, y };
+      return true;
+    }
+    return false;
+  }
+
+  getPlayerPosition = (): PositionRef => this.playerPosition;
 
   getBoard = () => this.board;
 }

@@ -33,6 +33,37 @@ export default function App() {
     setBoard(updatedBoard);
   }, [bitmap]);
 
+  useEffect(() => {
+    const handleKeyUp = (event: KeyboardEvent) => {
+
+      const playerPosition = boardRef.current.getPlayerPosition();
+      let newPosition = boardRef.current.getPlayerPosition();
+      switch (event.key) {
+        case 'ArrowRight':
+          newPosition = { x: playerPosition.x + 1, y: playerPosition.y };
+          break;
+        case 'ArrowLeft':
+          newPosition = { x: playerPosition.x - 1, y: playerPosition.y };
+          break;
+        case 'ArrowDown':
+          newPosition = { x: playerPosition.x, y: playerPosition.y + 1 };
+          break;
+        case 'ArrowUp':
+          newPosition = { x: playerPosition.x, y: playerPosition.y - 1 };
+          break;
+        default:
+          break;
+      }
+      boardRef.current.movePlayer(newPosition);
+      setBoard(new BoardModel(boardRef.current.getBoard()));
+    };
+
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
   return (
     <>
       {board ? <Board board={board} /> : <p>Loading...</p>}
