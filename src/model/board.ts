@@ -3,6 +3,7 @@ export enum CellValue {
   Wall = '1',   // wall
   Player = '2', // player
   Goal = '5',   // goal
+  Spawn = '6', // spawn
 }
 export type BoardRow = CellValue[];
 export type BoardRows = BoardRow[];

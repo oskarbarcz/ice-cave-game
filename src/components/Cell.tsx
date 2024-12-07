@@ -9,6 +9,7 @@ const colors = {
   [CellValue.Player]: 'bg-red-500',
   [CellValue.Goal]: 'bg-cyan-500',
   [CellValue.Wall]: 'bg-gray-200',
+  [CellValue.Spawn]: 'bg-gray-500',
 }
 
 export const Cell = ({ value }: CellProps) => {
