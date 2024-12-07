@@ -1,15 +1,15 @@
-import { CellValue } from "../model/board.ts";
+import { BoardCell } from "../type/board.type.ts";
 
 type CellProps = {
-  value: CellValue,
+  value: BoardCell,
 }
 
 const colors = {
-  [CellValue.Path]: 'bg-gray-500',
-  [CellValue.Player]: 'bg-red-500',
-  [CellValue.Goal]: 'bg-cyan-500',
-  [CellValue.Wall]: 'bg-gray-200',
-  [CellValue.Spawn]: 'bg-gray-500',
+  [BoardCell.Path]: 'bg-gray-500',
+  [BoardCell.Player]: 'bg-red-500',
+  [BoardCell.Goal]: 'bg-cyan-500',
+  [BoardCell.Wall]: 'bg-gray-200',
+  [BoardCell.Spawn]: 'bg-gray-500',
 }
 
 export const Cell = ({ value }: CellProps) => {

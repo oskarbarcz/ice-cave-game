@@ -1,19 +1,19 @@
 import './App.css';
-import { drawFromBitmap } from './model/functions/drawBoard.tsx';
-import { Board } from './components/Board.tsx';
+import { drawFromBitmap } from './service/functions/drawBoard.tsx';
+import { Grid } from './components/Grid.tsx';
 import { useEffect, useRef, useState } from 'react';
-import { loadBitmap } from './model/functions/loadBitmap.tsx';
-import { BoardModel } from './model/board.ts';
-import { Bitmap } from './model/bitmap.ts';
+import { bitmapService } from './service/bitmap.service.tsx';
+import {Bitmap} from "./type/bitmap.type.ts";
+import {BoardService} from "./service/board.service.ts";
 
 export default function App() {
   const [bitmap, setBitmap] = useState<Bitmap>([]);
-  const [board, setBoard] = useState<BoardModel | null>(null);
-  const boardRef = useRef<BoardModel>(new BoardModel([]));
+  const [board, setBoard] = useState<BoardService | null>(null);
+  const boardRef = useRef<BoardService>(new BoardService([]));
 
   // Load bitmap on mount
   useEffect(() => {
-    loadBitmap().then((loadedBitmap: Bitmap) => {
+    bitmapService().then((loadedBitmap: Bitmap) => {
       setBitmap(loadedBitmap);
     });
   }, []);
@@ -31,42 +31,18 @@ export default function App() {
 
     // Trigger a re-render with the updated board
     setBoard(updatedBoard);
-  }, [bitmap]);
 
-  useEffect(() => {
     const handleKeyUp = (event: KeyboardEvent) => {
-
-      const playerPosition = boardRef.current.getPlayerPosition();
-      let newPosition = boardRef.current.getPlayerPosition();
-      switch (event.key) {
-        case 'ArrowRight':
-          newPosition = { x: playerPosition.x + 1, y: playerPosition.y };
-          break;
-        case 'ArrowLeft':
-          newPosition = { x: playerPosition.x - 1, y: playerPosition.y };
-          break;
-        case 'ArrowDown':
-          newPosition = { x: playerPosition.x, y: playerPosition.y + 1 };
-          break;
-        case 'ArrowUp':
-          newPosition = { x: playerPosition.x, y: playerPosition.y - 1 };
-          break;
-        default:
-          return;
-      }
-      boardRef.current.movePlayer(newPosition);
-      setBoard(new BoardModel(boardRef.current.getBoard()));
+      boardRef.current.movePlayer(event);
+      setBoard(new BoardService(boardRef.current.getBoard()));
     };
 
     window.addEventListener('keyup', handleKeyUp);
-    return () => {
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, []);
+  }, [bitmap]);
 
   return (
     <>
-      {board ? <Board board={board} /> : <p>Loading...</p>}
+      {board ? <Grid board={board} /> : <p>Loading...</p>}
     </>
   );
 }

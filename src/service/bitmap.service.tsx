@@ -1,8 +1,8 @@
-import textfile from "../../assets/logo.txt";
-import {Bitmap} from "../bitmap.ts";
+import textfile from "../assets/logo.txt";
+import {Bitmap} from "../type/bitmap.type.ts";
 
 
-export const loadBitmap = async (): Promise<Bitmap> => {
+export const bitmapService = async (): Promise<Bitmap> => {
   const response = await fetch(textfile);
   const text = await response.text();
   const lines = text.split('\n');
