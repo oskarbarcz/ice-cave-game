@@ -20,6 +20,9 @@ function App() {
   }, []);
 
   useEffect( () =>{
+    if(bitmap.length === 0) {
+      return;
+    }
     console.log('rerender because bitmap was updated!');
   }, [bitmap]);
 
