@@ -5,21 +5,33 @@ import { useEffect, useRef, useState } from 'react';
 import { bitmapService } from './service/bitmap.service.tsx';
 import { Bitmap } from "./type/bitmap.type.ts";
 import { BoardService } from "./service/board.service.ts";
-import firstmapfile from './assets/logo.txt';
 
 export default function App() {
   const [bitmap, setBitmap] = useState<Bitmap>([]);
   const [board, setBoard] = useState<BoardService | null>(null);
   const boardRef = useRef<BoardService>(new BoardService([]));
 
-  let currentMap = firstmapfile;
+  const [maps] = useState<string[]>([
+    'src/assets/map1.txt',
+    'src/assets/map2.txt',
+    'src/assets/map3.txt',
+    'src/assets/map4.txt',
+    'src/assets/map5.txt',
+    'src/assets/map6.txt',
+    'src/assets/map7.txt',
+    'src/assets/map8.txt',
+    'src/assets/map9.txt',
+    'src/assets/map10.txt',
+  ]);
+
+  const [mapIndex, setMapIndex] = useState<number>(0);
 
   // Load bitmap on mount
   useEffect(() => {
-    bitmapService(firstmapfile).then((loadedBitmap: Bitmap) => {
+    bitmapService(maps[mapIndex]).then((loadedBitmap: Bitmap) => {
       setBitmap(loadedBitmap);
     });
-  }, []);
+  }, [mapIndex, maps]);
 
   // Update the board whenever bitmap changes
   useEffect(() => {
@@ -41,10 +53,7 @@ export default function App() {
       }
       catch (e) {
         if ((e as Error).message == "You win!") {
-          currentMap = 'src/assets/map.txt';
-          bitmapService(currentMap).then((loadedBitmap: Bitmap) => {
-            setBitmap(loadedBitmap);
-          });
+          setMapIndex(mapIndex + 1);
         }
       }
       setBoard(new BoardService(boardRef.current.getBoard()));

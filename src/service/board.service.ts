@@ -1,5 +1,5 @@
-import {PositionRef} from "../type/position.type.ts";
-import {Board, BoardCellType, BoardRow} from "../type/board.type.ts";
+import { PositionRef } from "../type/position.type.ts";
+import { Board, BoardCellType, BoardRow } from "../type/board.type.ts";
 
 export class BoardService {
   board: Board;
@@ -28,7 +28,7 @@ export class BoardService {
   }
 
   movePlayer = (event: KeyboardEvent): void => {
-    const {x, y} = this.eventToNewPosition(event);
+    const { x, y } = this.eventToNewPosition(event);
 
     if (this.board[y][x].type === BoardCellType.Wall) {
       return;
@@ -51,7 +51,7 @@ export class BoardService {
 
   getBoard = () => this.board;
 
-  map<T>(callback: (value: BoardRow, index: number, array: Board) => T): T[]{
+  map<T>(callback: (value: BoardRow, index: number, array: Board) => T): T[] {
     return this.board.map(
       (value: BoardRow, index: number, array) => callback(value, index, array)
     );
@@ -68,6 +68,14 @@ export class BoardService {
         return { x: playerPosition.x, y: playerPosition.y + 1 };
       case 'ArrowUp':
         return { x: playerPosition.x, y: playerPosition.y - 1 };
+      case 'r':
+        this.board.forEach(row => row.forEach(cell => cell.visited = true));
+        console.log('skip!');
+        return playerPosition;
+      case 'f':
+        this.board.forEach(row => row.forEach(cell => cell.fog = false));
+        console.log('fog!');
+        return playerPosition;
       default:
         return playerPosition;
     }
