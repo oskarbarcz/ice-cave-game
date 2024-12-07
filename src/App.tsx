@@ -68,7 +68,9 @@ export default function App() {
 
   return (
     <>
-    <p>ice cave level {mapIndex+1}</p>
+    <p>ice cave</p>
+    <p>level {mapIndex+1}</p>
+    <p>use arrow keys to navigate</p>
       {board ? <Grid board={board} /> : <p>Loading...</p>}
     </>
   );
