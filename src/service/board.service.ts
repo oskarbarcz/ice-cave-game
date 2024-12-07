@@ -44,6 +44,23 @@ export class BoardService {
     this.board[y][x].fog = false;
     this.board[this.playerPosition.y][this.playerPosition.x].type = BoardCellType.Path;
     this.board[this.playerPosition.y][this.playerPosition.x].visited = true;
+
+    const directions = [
+      { x: 1, y: 0 },
+      { x: -1, y: 0 },
+      { x: 0, y: 1 },
+      { x: 0, y: -1 },
+    ];
+
+    directions.forEach(direction => {
+      const newX = x + direction.x;
+      const newY = y + direction.y;
+
+      if (newX >= 0 && newX < this.board[0].length && newY >= 0 && newY < this.board.length) {
+      this.board[newY][newX].fog = false;
+      }
+    });
+
     this.playerPosition = { x, y };
   }
 
