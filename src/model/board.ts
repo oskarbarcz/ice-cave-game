@@ -1,4 +1,9 @@
-export type CellValue = 0 /* path */ | 1 /* wall */ | 2 /* player */ | 5 /* goal */;
+export enum CellValue {
+  Path = '0',   // path
+  Wall = '1',   // wall
+  Player = '2', // player
+  Goal = '5',   // goal
+}
 export type BoardRow = CellValue[];
 export type BoardRows = BoardRow[];
 
@@ -17,19 +22,19 @@ export class BoardModel {
   }
 
   renderPlayer = ({x, y}:PositionRef): void => {
-    this.board[y-1][x-1] = 2;
+    this.board[y-1][x-1] = CellValue.Player;
     this.playerPosition.x = x-1;
     this.playerPosition.y = y-1;
   }
 
   movePlayer = ({x,y}:PositionRef): boolean => {
-    if (this.board[y][x] != 1) {
-      if (this.board[y][x] == 5) {
+    if (this.board[y][x] != CellValue.Wall) {
+      if (this.board[y][x] == CellValue.Goal) {
         console.log('You win!');
         throw new Error('You win!');
       }
-      this.board[y][x] = 2;
-      this.board[this.playerPosition.y][this.playerPosition.x] = 0;
+      this.board[y][x] = CellValue.Player;
+      this.board[this.playerPosition.y][this.playerPosition.x] = CellValue.Path;
       this.playerPosition = { x, y };
       return true;
     }
