@@ -52,7 +52,7 @@ export default function App() {
           newPosition = { x: playerPosition.x, y: playerPosition.y - 1 };
           break;
         default:
-          break;
+          return;
       }
       boardRef.current.movePlayer(newPosition);
       setBoard(new BoardModel(boardRef.current.getBoard()));
