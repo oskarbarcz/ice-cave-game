@@ -9,10 +9,22 @@ export class BoardService {
     this.board = rows;
   }
 
-  renderPlayer = ({x, y}:PositionRef): void => {
-    this.board[y-1][x-1] = BoardCell.Player;
-    this.playerPosition.x = x-1;
-    this.playerPosition.y = y-1;
+  renderPlayer = (): void => {
+    let x = -1, y = -1;
+    for (let row = 0; row < this.board.length; row++) {
+      for (let col = 0; col < this.board[row].length; col++) {
+        if (this.board[row][col] === BoardCell.Spawn) {
+          x = col;
+          y = row;
+          break;
+        }
+      }
+      if (x !== -1 && y !== -1) break;
+    }
+
+    this.board[y][x] = BoardCell.Player;
+    this.playerPosition.x = x;
+    this.playerPosition.y = y;
   }
 
   movePlayer = (event: KeyboardEvent): void => {

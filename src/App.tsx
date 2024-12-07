@@ -29,7 +29,7 @@ export default function App() {
 
     // Update the board based on the loaded bitmap
     const updatedBoard = drawFromBitmap(bitmap);
-    updatedBoard.renderPlayer({ x: 19, y: 2 });
+    updatedBoard.renderPlayer();
     boardRef.current = updatedBoard; // Store in ref
 
     // Trigger a re-render with the updated board
