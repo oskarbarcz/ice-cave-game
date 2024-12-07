@@ -24,7 +24,7 @@ export class BoardModel {
 
   movePlayer = ({x,y}:PositionRef): boolean => {
     if (this.board[y][x] != 1) {
-      if (this.board[y][x] === 5) {
+      if (this.board[y][x] == 5) {
         console.log('You win!');
         throw new Error('You win!');
       }
