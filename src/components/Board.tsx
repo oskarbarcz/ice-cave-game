@@ -1,15 +1,16 @@
-import {BoardContent} from "../model/board.ts";
+import {Cell} from "./Cell.tsx";
+import {BoardModel, BoardRow, CellValue} from "../model/board.ts";
 
-type BoardProps<X extends number, Y extends number> = {
-  board: BoardContent<X, Y>
+type BoardProps = {
+  board: BoardModel,
 }
 
-export const Board = <X extends number, Y extends number> ({board}: BoardProps<X, Y>) => {
+export const Board =({board}: BoardProps) => {
   return (
-    <div className="leading-3 text-xs" style={{letterSpacing: '0.40em'}}>
-       {board.map((row, indexY: number) => <div key={indexY}>{
-         row.map((element, indexX: number) => <span key={indexX}>{element}</span>)
-       }</div>)}
+    <div className="leading-3" style={{letterSpacing: '0.20em'}}>
+       {board.getBoard().map((row: BoardRow, y: number) => <div key={y}>{
+           row.map((value: CellValue, x: number) => <Cell key={x} value={value} />)}
+         </div>)}
     </div>
   );
 }

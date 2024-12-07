@@ -1,11 +1,11 @@
-import textfile from "../../assets/map.txt";
-var lines;
-var data: string[][] = [];
+import textfile from "../../assets/logo.txt";
+import {Bitmap} from "../bitmap.ts";
 
-export const loadBitmap = async (): Promise<string[][]> => {
+
+export const loadBitmap = async (): Promise<Bitmap> => {
   const response = await fetch(textfile);
   const text = await response.text();
-  lines = text.split('\n');
-  data = lines.map(line => line.split(''));
-  return data as string[][];
+  const lines = text.split('\n');
+  const data = lines.map(line => line.split(''));
+  return data as unknown as Bitmap;
 }

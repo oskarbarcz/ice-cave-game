@@ -1,9 +1,7 @@
-import {BoardCharacter, BoardContent} from "../board.ts";
+import {BoardModel, BoardRow, CellValue} from "../board.ts";
 
-export const drawBoard = <X extends number, Y extends number>(width: X, height: Y): BoardContent<X, Y> => {
-  const board: BoardCharacter[][] = Array.from({ length: height }, () =>
-    Array.from({ length: width }, () => <span>.</span>)
-  );
+export const drawFromBitmap = (bitmap: BoardRow[]): BoardModel => {
+  const map =  bitmap.map((row: BoardRow) => row.map((column: CellValue) => column));
 
-  return board as unknown as BoardContent<X, Y>;
+  return new BoardModel(map);
 };

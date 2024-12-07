@@ -1,36 +1,41 @@
-import {useEffect, useState} from 'react';
-import './App.css'
-import {Frame} from "./components/Frame.tsx";
-import { drawBoard } from './model/functions/drawBoard.tsx';
+import './App.css';
+import { drawFromBitmap } from './model/functions/drawBoard.tsx';
+import { Board } from './components/Board.tsx';
+import { useEffect, useRef, useState } from 'react';
 import { loadBitmap } from './model/functions/loadBitmap.tsx';
+import { BoardModel } from './model/board.ts';
+import { Bitmap } from './model/bitmap.ts';
 
-function App() {
-  const [board, updateBoard] = useState(drawBoard(80, 80));
-  const [bitmap, setBitmap] = useState<string[][]>([]);
+export default function App() {
+  const [bitmap, setBitmap] = useState<Bitmap>([]);
+  const [board, setBoard] = useState<BoardModel | null>(null);
+  const boardRef = useRef<BoardModel>(new BoardModel([]));
 
-  useEffect( () =>{
-    async function getBitmap() {
-      const bitmap = await loadBitmap();
-      setBitmap(bitmap);
-    }
-
-    if(bitmap.length === 0) {
-      getBitmap();
-    }
+  // Load bitmap on mount
+  useEffect(() => {
+    loadBitmap().then((loadedBitmap: Bitmap) => {
+      setBitmap(loadedBitmap);
+    });
   }, []);
 
-  useEffect( () =>{
-    if(bitmap.length === 0) {
+  // Update the board whenever bitmap changes
+  useEffect(() => {
+    if (bitmap.length === 0) {
       return;
     }
-    console.log('rerender because bitmap was updated!');
+
+    // Update the board based on the loaded bitmap
+    const updatedBoard = drawFromBitmap(bitmap);
+    updatedBoard.renderPlayer({ x: 19, y: 2 });
+    boardRef.current = updatedBoard; // Store in ref
+
+    // Trigger a re-render with the updated board
+    setBoard(updatedBoard);
   }, [bitmap]);
 
   return (
     <>
-      <Frame board={board} updateBoard={updateBoard} />
+      {board ? <Board board={board} /> : <p>Loading...</p>}
     </>
-  )
+  );
 }
-
-export default App
