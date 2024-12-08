@@ -1,7 +1,7 @@
 import { BoardCell, BoardCellType } from "../../type/board.type.ts";
 const colors = {
   [BoardCellType.Path]: 'bg-gray-500',
-  [BoardCellType.Player]: 'bg-red-500',
+  [BoardCellType.Player]: 'bg-cyan-500',
   [BoardCellType.Goal]: 'bg-cyan-500',
   [BoardCellType.Wall]: 'bg-gray-200',
   [BoardCellType.Spawn]: 'bg-gray-500',

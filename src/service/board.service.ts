@@ -28,6 +28,8 @@ export class BoardService {
   }
 
   movePlayer = (event: KeyboardEvent): void => {
+    event.preventDefault();
+
     const { x, y } = this.eventToNewPosition(event);
     if (x === this.playerPosition.x && y === this.playerPosition.y) {
       return;
