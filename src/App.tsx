@@ -23,7 +23,7 @@ export default function App() {
 
   // Create and play background music
   useEffect(() => {
-    const backgroundMusic = new Audio('/assets/audio/holiday-bgm.mp3');
+    const backgroundMusic = new Audio('assets/audio/holiday-bgm.mp3');
     backgroundMusic.loop = true;
 
     const playMusic = () => {
@@ -72,7 +72,7 @@ export default function App() {
       catch (e) {
         if ((e as Error).message == "You win!") {
           setMapIndex(mapIndex + 1);
-            const audio = new Audio('/assets/audio/next-level-sound.mp3');
+            const audio = new Audio('assets/audio/next-level-sound.mp3');
             audio.play();
         }
         if ((e as Error).message == "You are dead") {
