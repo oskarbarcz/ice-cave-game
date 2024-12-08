@@ -80,12 +80,16 @@ export class BoardService {
   private eventToNewPosition = (event: KeyboardEvent): PositionRef => {
     const playerPosition = this.getPlayerPosition();
     switch (event.key) {
+      case 'd':
       case 'ArrowRight':
         return { x: playerPosition.x + 1, y: playerPosition.y };
+      case 'a':
       case 'ArrowLeft':
         return { x: playerPosition.x - 1, y: playerPosition.y };
+      case 's':
       case 'ArrowDown':
         return { x: playerPosition.x, y: playerPosition.y + 1 };
+      case 'w':
       case 'ArrowUp':
         return { x: playerPosition.x, y: playerPosition.y - 1 };
       case 'r':
