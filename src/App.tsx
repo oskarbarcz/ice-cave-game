@@ -16,6 +16,29 @@ export default function App() {
   const maps = bitmapListProvider();
   const [mapIndex, setMapIndex] = useState<number>(0);
 
+  // Create and play background music
+  useEffect(() => {
+    const backgroundMusic = new Audio('src/assets/audio/holiday-bgm.mp3');
+    backgroundMusic.loop = true;
+
+    const playMusic = () => {
+      backgroundMusic.volume = 0.1;
+      console.log('Playing music');
+      backgroundMusic.play();
+      document.removeEventListener('click', playMusic);
+    };
+
+    document.addEventListener('click', playMusic);
+
+    return () => {
+      backgroundMusic.pause();
+      console.log('Music paused');
+      backgroundMusic.currentTime = 0;
+      document.removeEventListener('click', playMusic);
+    };
+  }, []);
+
+
   // Load bitmap on mount
   useEffect(() => {
     bitmapService(maps[mapIndex]).then((loadedBitmap: Bitmap) => {
@@ -30,7 +53,7 @@ export default function App() {
     }
 
     // Update the board based on the loaded bitmap
-    const updatedBoard = drawFromBitmap(bitmap, mapIndex in [0,1,2]);
+    const updatedBoard = drawFromBitmap(bitmap, mapIndex in [0, 1, 2]);
     updatedBoard.renderPlayer();
     boardRef.current = updatedBoard;
 
