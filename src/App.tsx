@@ -6,6 +6,7 @@ import { bitmapListProvider, bitmapService } from './service/bitmap.service.tsx'
 import { Bitmap } from "./type/bitmap.type.ts";
 import { BoardService } from "./service/board.service.ts";
 import { Header } from "./components/Header/Header.tsx";
+import { FogWarning } from "./components/FogWarning/FogWarning.tsx";
 
 export default function App() {
   const [bitmap, setBitmap] = useState<Bitmap>([]);
@@ -43,7 +44,7 @@ export default function App() {
       catch (e) {
         if ((e as Error).message == "You win!") {
           setMapIndex(mapIndex + 1);
-            const audio = new Audio('src/assets/grindr.mp3');
+            const audio = new Audio('src/assets/audio/next-level-sound.mp3');
             audio.play();
         }
       }
@@ -61,6 +62,7 @@ export default function App() {
     <>
       <Header mapIndex={mapIndex + 1}/>
       {board ? <Grid board={board}/> : <p>Loading...</p>}
+      {mapIndex in [3,4] ? <FogWarning/> : '' }
     </>
   );
 }
