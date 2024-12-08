@@ -10,16 +10,16 @@ export const bitmapService = async (file : string): Promise<Bitmap> => {
 
 export const bitmapListProvider = (): BitmapUrl[] => {
   return [
-    'src/assets/maps/0.txt',
-    'src/assets/maps/1.txt',
-    'src/assets/maps/2.txt',
-    'src/assets/maps/3.txt',
-    'src/assets/maps/4.txt',
-    'src/assets/maps/5.txt',
-    'src/assets/maps/6.txt',
-    'src/assets/maps/7.txt',
-    'src/assets/maps/8.txt',
-    'src/assets/maps/9.txt',
-    'src/assets/maps/10.txt'
+    'assets/maps/0.txt',
+    'assets/maps/1.txt',
+    'assets/maps/2.txt',
+    'assets/maps/3.txt',
+    'assets/maps/4.txt',
+    'assets/maps/5.txt',
+    'assets/maps/6.txt',
+    'assets/maps/7.txt',
+    'assets/maps/8.txt',
+    'assets/maps/9.txt',
+    'assets/maps/10.txt'
   ]
 }
