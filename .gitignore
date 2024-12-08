@@ -1,0 +1,13 @@
+# System
+.DS_Store
+
+# IDE
+.idea
+
+# Project
+.env
+!.env.example
+.react-router
+build
+node_modules
+*.tsbuildinfo
