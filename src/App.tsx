@@ -9,6 +9,7 @@ import { Header } from "./components/Header/Header.tsx";
 import {WarningContainer} from "./components/WarningContainer/WarningContainer.tsx";
 import {LoadingScreen} from "./components/LoadingScreen/LoadingScreen.tsx";
 import {YouAreBombedScreen} from "./components/YouAreBombedScreen/YouAreBombedScreen.tsx";
+import {Copyright} from "./components/Copyright/Copyright.tsx";
 
 export default function App() {
   const [bitmap, setBitmap] = useState<Bitmap>([]);
@@ -99,6 +100,7 @@ export default function App() {
       displayScreen === "loading" ? <LoadingScreen/> :
       displayScreen === "bomba" ? <YouAreBombedScreen/> : null }
       <WarningContainer mapIndex={mapIndex}/>
+      <Copyright/>
     </>
   );
 }
