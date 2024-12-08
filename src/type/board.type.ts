@@ -10,6 +10,7 @@ export type BoardCell = {
   type: BoardCellType;
   visited: boolean;
   fog: boolean;
+  mirrored: boolean;
 }
 
 export type BoardRow = BoardCell[];

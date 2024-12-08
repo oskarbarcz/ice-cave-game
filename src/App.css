@@ -26,9 +26,12 @@
   background-position: center;
 }
 .player-bg {
-  background-image: url('assets/penguin.png');
+  background-image: url('assets/pengu_anim.gif');
   background-size: cover;
   background-position: center;
+}
+.mirror-bg {
+  transform: scaleX(-1);
 }
 
 
