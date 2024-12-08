@@ -45,6 +45,7 @@ export class BoardService {
     this.board[y][x].type = BoardCellType.Player;
     this.board[y][x].visited = true;
     this.board[y][x].fog = false;
+    this.board[y][x].mirrored = x > this.playerPosition.x;
     this.board[this.playerPosition.y][this.playerPosition.x].type = BoardCellType.Path;
     this.board[this.playerPosition.y][this.playerPosition.x].visited = true;
 

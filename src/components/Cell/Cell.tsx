@@ -23,10 +23,10 @@ export const Cell = (value: CellProps) => {
   const props = value.value;
   const color = colors[props.type];
 
-  if (props.type === BoardCellType.Player) return <div className={`w-10 h-10 ${color} ${images[props.type]} inline-block`}></div>;
+  if (props.type === BoardCellType.Player) return <div className={`w-10 h-10 ${props.mirrored ? 'mirror-bg' : ''} ${color} ${images[props.type]} inline-block`}></div>;
 
-  if (props.fog && !props.visited) return <div className={`w-10 h-10 fog-bg ${colors[BoardCellType.Wall]} inline-block`}></div>;
+  if (props.fog && !props.visited) return <div className={`w-10 h-10 fog-bg ${props.mirrored ? 'mirror-bg' : ''} ${colors[BoardCellType.Wall]} inline-block`}></div>;
 
-  return <div className={`w-10 h-10 ${color} inline-block ${images[props.type]}`}></div>;
+  return <div className={`w-10 h-10 ${props.mirrored ? 'mirror-bg' : ''} ${color} inline-block ${images[props.type]}`}></div>;
 
 }
