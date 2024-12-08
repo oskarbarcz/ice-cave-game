@@ -72,7 +72,7 @@ export default function App() {
       catch (e) {
         if ((e as Error).message == "You win!") {
           setMapIndex(mapIndex + 1);
-            const audio = new Audio('/audio/next-level-sound.mp3');
+            const audio = new Audio('/assets/audio/next-level-sound.mp3');
             audio.play();
         }
         if ((e as Error).message == "You are dead") {
