@@ -12,6 +12,7 @@ export default function App() {
   const boardRef = useRef<BoardService>(new BoardService([]));
 
   const [maps] = useState<string[]>([
+    'src/assets/map0.txt',
     'src/assets/map1.txt',
     'src/assets/map2.txt',
     'src/assets/map3.txt',
@@ -42,7 +43,7 @@ export default function App() {
     // Update the board based on the loaded bitmap
     const updatedBoard = drawFromBitmap(bitmap);
     updatedBoard.renderPlayer();
-    boardRef.current = updatedBoard; // Store in ref
+    boardRef.current = updatedBoard;
 
     // Trigger a re-render with the updated board
     setBoard(updatedBoard);
