@@ -1,6 +1,7 @@
 export enum BitmapCell {
     Path = 0,
     Wall = 1,
+    Bomb = 4,
     Goal = 5,
     Spawn = 6,
 }

@@ -30,6 +30,11 @@
   background-size: cover;
   background-position: center;
 }
+.bomb-bg {
+    background-image: url('assets/bomb.png');
+    background-size: cover;
+    background-position: center;
+}
 .mirror-bg {
   transform: scaleX(-1);
 }

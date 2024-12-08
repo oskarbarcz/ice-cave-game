@@ -2,6 +2,7 @@ export enum BoardCellType {
   Path = '0',
   Wall = '1',
   Player = '2',
+  Bomb = '4',
   Goal = '5',
   Spawn = '6',
 }

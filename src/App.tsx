@@ -7,6 +7,7 @@ import { Bitmap } from "./type/bitmap.type.ts";
 import { BoardService } from "./service/board.service.ts";
 import { Header } from "./components/Header/Header.tsx";
 import { FogWarning } from "./components/FogWarning/FogWarning.tsx";
+import {BombWarning} from "./components/BombWarning/BombWarning.tsx";
 
 export default function App() {
   const [bitmap, setBitmap] = useState<Bitmap>([]);
@@ -85,7 +86,9 @@ export default function App() {
     <>
       <Header mapIndex={mapIndex + 1}/>
       {board ? <Grid board={board}/> : <p>Loading...</p>}
-      {mapIndex in [3,4] ? <FogWarning/> : '' }
+      {console.log(mapIndex)}
+      {mapIndex === 1 ? <BombWarning/> : '' }
+      {mapIndex === 2 || mapIndex === 3 ? <FogWarning/> : '' }
     </>
   );
 }
