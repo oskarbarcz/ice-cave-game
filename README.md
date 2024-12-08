@@ -1,50 +1,76 @@
-# React + TypeScript + Vite
+# Ice Cave Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Maze game project created on GameJam 2024 in Kędzierzyn-Koźle.
 
-Currently, two official plugins are available:
+## Collaborators
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This game wouldn't be possible without enormous engagement of **[@Ferfixxio](https://github.com/kodowiec)** and
+**[@kodowiec](https://github.com/FerFixxio)**.
 
-## Expanding the ESLint configuration
+## Contents
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Repository contains frontend code for **[Ice Cave](https://oskarbarcz.github.io/ice-cave-game/)** game.
 
-- Configure the top-level `parserOptions` property like this:
+Project is using **Node.js** and **TypeScript** in versions listed below:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+| Technology | Version |
+|------------|---------|
+| React      | 18.3    |
+| TypeScript | ^5.6    |
+
+Main dependencies are **Vite**, **React** and **Tailwind CSS** in versions listed below.
+
+| Vendor       | Version |
+|--------------|---------|
+| Vite         | 6.0     |
+| React        | 18.3    |
+| Tailwind CSS | 3.4     |
+
+## Getting Started
+
+### Installation
+
+First make sure you are using **Node** in version **22** and **npm** in version **10**:
+```shell
+node --version
+v22.9.0
+
+npm --version
+10.8.3
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Install the dependencies:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+### Development
+
+Start the development server with HMR:
+
+```bash
+npm run dev
+```
+
+Your application will be available at `http://localhost:5173/ice-cave-game/`.
+
+## Deployment
+
+### Building for production
+
+Create a production build:
+```bash
+npm run build
+```
+
+### GitHub Pages deployment
+
+To build and deploy page to GitHub Pages run this command:
+
+```bash
+# For npm
+npm run deploy
+```
+
+Give it 2-3 minutes and check out results [here](https://oskarbarcz.github.io/ice-cave-game/).
