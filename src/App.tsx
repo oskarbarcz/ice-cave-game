@@ -8,6 +8,8 @@ import { BoardService } from "./service/board.service.ts";
 import { Header } from "./components/Header/Header.tsx";
 import { FogWarning } from "./components/FogWarning/FogWarning.tsx";
 import {BombWarning} from "./components/BombWarning/BombWarning.tsx";
+import { YouAreBombedScreen } from './components/YouAreBombedScreen/YouAreBombedScreen.tsx';
+import { LoadingScreen } from './components/LoadingScreen/LoadingScreen.tsx';
 
 export default function App() {
   const [bitmap, setBitmap] = useState<Bitmap>([]);
@@ -16,6 +18,8 @@ export default function App() {
 
   const maps = bitmapListProvider();
   const [mapIndex, setMapIndex] = useState<number>(0);
+
+  const [displayScreen, setDisplayScreen] = useState<string>("loading");
 
   // Create and play background music
   useEffect(() => {
@@ -71,6 +75,12 @@ export default function App() {
             const audio = new Audio('src/assets/audio/next-level-sound.mp3');
             audio.play();
         }
+        if ((e as Error).message == "You are dead") {
+          setBoard(null);
+          setDisplayScreen("bomba");
+          return;
+        }
+
       }
       setBoard(new BoardService(boardRef.current.getBoard()));
     };
@@ -85,7 +95,9 @@ export default function App() {
   return (
     <>
       <Header mapIndex={mapIndex + 1}/>
-      {board ? <Grid board={board}/> : <p>Loading...</p>}
+      {board ? <Grid board={board}/> :
+      displayScreen === "loading" ? <LoadingScreen/> :
+      displayScreen === "bomba" ? <YouAreBombedScreen/> : null }
       {console.log(mapIndex)}
       {mapIndex === 1 ? <BombWarning/> : '' }
       {mapIndex === 2 || mapIndex === 3 ? <FogWarning/> : '' }
