@@ -77,6 +77,7 @@ export default function App() {
         }
         if ((e as Error).message == "You are dead") {
           setBoard(null);
+          window.removeEventListener('keyup', handleKeyUp);
           setDisplayScreen("bomba");
           return;
         }
@@ -99,8 +100,8 @@ export default function App() {
       displayScreen === "loading" ? <LoadingScreen/> :
       displayScreen === "bomba" ? <YouAreBombedScreen/> : null }
       {console.log(mapIndex)}
-      {mapIndex === 1 ? <BombWarning/> : '' }
-      {mapIndex === 2 || mapIndex === 3 ? <FogWarning/> : '' }
+      {mapIndex === 1 && displayScreen !== "bomba" ? <BombWarning/> : '' }
+      {(mapIndex === 2 && displayScreen !== "bomba") || (mapIndex === 3 && displayScreen !== "bomba") ? <FogWarning/> : '' }
     </>
   );
 }
