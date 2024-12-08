@@ -54,6 +54,8 @@ export default function App() {
       catch (e) {
         if ((e as Error).message == "You win!") {
           setMapIndex(mapIndex + 1);
+            const audio = new Audio('src/assets/grindr.mp3');
+            audio.play();
         }
       }
       setBoard(new BoardService(boardRef.current.getBoard()));

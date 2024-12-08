@@ -29,6 +29,9 @@ export class BoardService {
 
   movePlayer = (event: KeyboardEvent): void => {
     const { x, y } = this.eventToNewPosition(event);
+    if (x === this.playerPosition.x && y === this.playerPosition.y) {
+      return;
+    }
 
     if (this.board[y][x].type === BoardCellType.Wall) {
       return;
@@ -90,7 +93,7 @@ export class BoardService {
         console.log('skip!');
         return playerPosition;
       case 'f':
-        this.board.forEach(row => row.forEach(cell => cell.fog = false));
+        this.board.forEach(row => row.forEach(cell => { cell.fog = true; cell.visited = false; }));
         console.log('fog!');
         return playerPosition;
       default:

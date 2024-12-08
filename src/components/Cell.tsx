@@ -25,7 +25,7 @@ export const Cell = (value: CellProps) => {
 
   if (props.type === BoardCellType.Player) return <div className={`w-4 h-4 ${color} ${images[props.type]} inline-block`}></div>;
 
-  if (props.fog && !props.visited) return <div className={`w-4 h-4 wall-bg ${colors[BoardCellType.Wall]} inline-block`}></div>;
+  if (props.fog && !props.visited) return <div className={`w-4 h-4 fog-bg ${colors[BoardCellType.Wall]} inline-block`}></div>;
 
   return <div className={`w-4 h-4 ${color} inline-block ${images[props.type]}`}></div>;
 

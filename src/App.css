@@ -10,6 +10,11 @@
   background-size: cover;
   background-position: center;
 }
+.fog-bg {
+  background-image: url('assets/idk.png');
+  background-size: cover;
+  background-position: center;
+}
 .wall-bg {
   background-image: url('assets/wall.png');
   background-size: cover;
