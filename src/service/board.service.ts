@@ -23,6 +23,7 @@ export class BoardService {
     }
 
     this.board[y][x].type = BoardCellType.Player;
+    this.board[y][x].mirrored = true;
     this.playerPosition.x = x;
     this.playerPosition.y = y;
   }
