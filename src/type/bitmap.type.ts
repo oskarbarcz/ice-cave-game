@@ -5,4 +5,7 @@ export enum BitmapCell {
     Spawn = 6,
 }
 export type BitmapRow = BitmapCell[];
+
 export type Bitmap = BitmapRow[];
+
+export type BitmapUrl = string;

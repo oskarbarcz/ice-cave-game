@@ -1,6 +1,6 @@
-import {Cell} from "./Cell.tsx";
-import {BoardRow, BoardCell} from "../type/board.type.ts";
-import {BoardService} from "../service/board.service.ts";
+import {Cell} from "../Cell/Cell.tsx";
+import {BoardRow, BoardCell} from "../../type/board.type.ts";
+import {BoardService} from "../../service/board.service.ts";
 
 type BoardProps = {
   board: BoardService,

@@ -1,30 +1,18 @@
 import './App.css';
 import { drawFromBitmap } from './service/functions/drawBoard.tsx';
-import { Grid } from './components/Grid.tsx';
+import { Grid } from './components/Grid/Grid.tsx';
 import { useEffect, useRef, useState } from 'react';
-import { bitmapService } from './service/bitmap.service.tsx';
+import { bitmapListProvider, bitmapService } from './service/bitmap.service.tsx';
 import { Bitmap } from "./type/bitmap.type.ts";
 import { BoardService } from "./service/board.service.ts";
+import { Header } from "./components/Header/Header.tsx";
 
 export default function App() {
   const [bitmap, setBitmap] = useState<Bitmap>([]);
   const [board, setBoard] = useState<BoardService | null>(null);
   const boardRef = useRef<BoardService>(new BoardService([]));
 
-  const [maps] = useState<string[]>([
-    'src/assets/map0.txt',
-    'src/assets/map1.txt',
-    'src/assets/map2.txt',
-    'src/assets/map3.txt',
-    'src/assets/map4.txt',
-    'src/assets/map5.txt',
-    'src/assets/map6.txt',
-    'src/assets/map7.txt',
-    'src/assets/map8.txt',
-    'src/assets/map9.txt',
-    'src/assets/map10.txt',
-  ]);
-
+  const maps = bitmapListProvider();
   const [mapIndex, setMapIndex] = useState<number>(0);
 
   // Load bitmap on mount
@@ -32,7 +20,7 @@ export default function App() {
     bitmapService(maps[mapIndex]).then((loadedBitmap: Bitmap) => {
       setBitmap(loadedBitmap);
     });
-  }, [mapIndex, maps]);
+  }, [mapIndex]);
 
   // Update the board whenever bitmap changes
   useEffect(() => {
@@ -41,7 +29,7 @@ export default function App() {
     }
 
     // Update the board based on the loaded bitmap
-    const updatedBoard = drawFromBitmap(bitmap);
+    const updatedBoard = drawFromBitmap(bitmap, mapIndex in [0,1,2]);
     updatedBoard.renderPlayer();
     boardRef.current = updatedBoard;
 
@@ -71,10 +59,7 @@ export default function App() {
 
   return (
     <>
-      <div className="pb-6">
-        <p>ice cave - level {mapIndex + 1}</p>
-        <p>use arrow keys to navigate</p>
-      </div>
+      <Header mapIndex={mapIndex + 1}/>
       {board ? <Grid board={board}/> : <p>Loading...</p>}
     </>
   );

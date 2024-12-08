@@ -1,4 +1,4 @@
-import { BoardCell, BoardCellType } from "../type/board.type.ts";
+import { BoardCell, BoardCellType } from "../../type/board.type.ts";
 const colors = {
   [BoardCellType.Path]: 'bg-gray-500',
   [BoardCellType.Player]: 'bg-red-500',
