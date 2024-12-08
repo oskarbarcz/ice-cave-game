@@ -40,6 +40,11 @@ export class BoardService {
       return;
     }
 
+    if (this.board[y][x].type == BoardCellType.Bomb) {
+      console.log('You are dead');
+      throw new Error('You are dead');
+    }
+
     if (this.board[y][x].type == BoardCellType.Goal) {
       console.log('You win!');
       throw new Error('You win!');
