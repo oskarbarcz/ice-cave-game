@@ -91,7 +91,7 @@ export default function App() {
     return () => {
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [bitmap]);
+  }, [mapIndex, bitmap]);
 
   return (
     <>
