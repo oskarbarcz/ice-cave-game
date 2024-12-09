@@ -6,10 +6,11 @@ import { bitmapListProvider, bitmapService } from './service/bitmap.service.tsx'
 import { Bitmap } from "./type/bitmap.type.ts";
 import { BoardService } from "./service/board.service.ts";
 import { Header } from "./components/Header/Header.tsx";
-import {WarningContainer} from "./components/WarningContainer/WarningContainer.tsx";
-import {LoadingScreen} from "./components/LoadingScreen/LoadingScreen.tsx";
-import {YouAreBombedScreen} from "./components/YouAreBombedScreen/YouAreBombedScreen.tsx";
-import {Copyright} from "./components/Copyright/Copyright.tsx";
+import { WarningContainer } from "./components/WarningContainer/WarningContainer.tsx";
+import { LoadingScreen } from "./components/LoadingScreen/LoadingScreen.tsx";
+import { YouAreBombedScreen } from "./components/YouAreBombedScreen/YouAreBombedScreen.tsx";
+import { Copyright } from "./components/Copyright/Copyright.tsx";
+import { VictoryScreen } from './components/VictoryScreen/VictoryScreen.tsx';
 
 export default function App() {
   const [bitmap, setBitmap] = useState<Bitmap>([]);
@@ -71,9 +72,15 @@ export default function App() {
       }
       catch (e) {
         if ((e as Error).message == "You win!") {
+          const audio = new Audio('assets/audio/next-level-sound.mp3');
+          audio.play();
+          if (mapIndex+1 === maps.length) {
+            setBoard(null);
+            window.removeEventListener('keyup', handleKeyUp);
+            setDisplayScreen("victory");
+            return;
+          }
           setMapIndex(mapIndex + 1);
-            const audio = new Audio('assets/audio/next-level-sound.mp3');
-            audio.play();
         }
         if ((e as Error).message == "You are dead") {
           setBoard(null);
@@ -95,12 +102,12 @@ export default function App() {
 
   return (
     <>
-      <Header mapIndex={mapIndex + 1}/>
-      {board ? <Grid board={board}/> :
-      displayScreen === "loading" ? <LoadingScreen/> :
-      displayScreen === "bomba" ? <YouAreBombedScreen/> : null }
-      <WarningContainer mapIndex={mapIndex}/>
-      <Copyright/>
+      <Header mapIndex={mapIndex + 1} />
+      {board ? <Grid board={board} /> :
+        displayScreen === "loading" ? <LoadingScreen /> :
+          displayScreen === "bomba" ? <YouAreBombedScreen /> : null}
+      {displayScreen === "victory" ? <VictoryScreen /> : displayScreen === "bomba" ? null : <WarningContainer mapIndex={mapIndex} />}
+      <Copyright />
     </>
   );
 }
