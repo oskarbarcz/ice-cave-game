@@ -1,7 +1,7 @@
 {
   "name": "ice-cave-game",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "license": "Unlicense",
   "homepage": "https://oskarbarcz.github.io/ice-cave-game/",
